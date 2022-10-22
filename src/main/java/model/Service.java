@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 /**
  * Service offered by the franchise.
  */
@@ -97,8 +98,46 @@ public class Service {
      * @return true if the customer is successfully enrolled, false otherwise
      */
 
-    public boolean addCustomerToService(Customer customer, Franchise fID){
-    	return false;
+    public boolean addCustomerToService(Customer customer, Franchise fID) throws IllegalServiceException{
+        if (customer.getNumberOfServices() >= 3) {
+            return false;
+        }
+
+        List<Service> service_list = fID.getServices();
+        for (Service srv: service_list){
+            List<Customer> franchise_customers = srv.getCustomer();
+            if (franchise_customers.size() >= 15) {
+                return false;
+            }
+             
+        }
+
+        
+        System.out.println("Looping over customer");
+        for (Customer curr_customer:getCustomer()){
+        	System.out.printf("%d %s\n", customer.getId(), customer.getName());
+        	System.out.println(curr_customer.getId());
+            if (customer.getId() == curr_customer.getId()){
+                throw new IllegalServiceException("Service is already being used by the same customer");
+            }
+        }
+
+        List<Customer> curr_customers = getCustomer();
+        curr_customers.add(customer);
+        
+
+        customer.setNumberOfServices(customer.getNumberOfServices() + 1);
+        System.out.printf("%d no of services of a customer\n", customer.getNumberOfServices());
+
+        
+        /* TODO do not insert this service if it is already there */
+        List<Service> srv_list = new ArrayList<Service>();
+        srv_list.add(this);
+        fID.setServices(srv_list);
+        
+
+
+    	return true;
    
     }
 
