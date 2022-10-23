@@ -108,13 +108,11 @@ class AddCustomerToService {
 			Integer i = 0;
 			//Do not want to store the list of customers as it will be memory consuming
 			for (i = 0; i < 500; i++ ) {
-				System.out.println(i);
 				Customer new_customer = new Customer("Vaidehi_" + i.toString(), i, franchise);
 				boolean is_success = service.addCustomerToService(new_customer, franchise);
 				assertTrue(is_success);
 
 			}
-			System.out.println("ADD ONE MORE CUSTOMER");
 			Customer new_customer = new Customer("Vaidehi_", 532, franchise);
 	
 			boolean is_success = service.addCustomerToService(new_customer, franchise);
