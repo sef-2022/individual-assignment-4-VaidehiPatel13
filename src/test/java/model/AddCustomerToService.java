@@ -47,7 +47,7 @@ class AddCustomerToService {
 	 	customer = new Customer("Vaidehi", 13, franchise);
 	}
 	
-//   This method test if the customer is successfully added to the service
+//   This method test if the customer is successfully added to the service if all the constraints are met
 	 @Test
 	 @DisplayName("Add customer to service if constraints are met")
      void addCustomerToService_True() throws IllegalServiceException{
@@ -57,7 +57,7 @@ class AddCustomerToService {
 
      }
 
-//  This method tests if the customer is already using the same service and throws an exception
+//  This method tests if the customer is already using the same service and if so throws an exception
 	@Test
 	@DisplayName("Check if the customer is using the same service")
     void addCustomerToService_ThrowsException_IfCustomerUsingSameService() throws IllegalServiceException{
@@ -102,7 +102,7 @@ class AddCustomerToService {
 
 
 	 	
-//   This method test if the franchise has more than 500 customers 
+//   This method test if the service offered by a franchise does not have more than 500 customers 
 	 @Test
 	 @DisplayName("Check if the franchise has more than 500 customers")
      void addCustomerToService_False_FranchiseMoreThan500Customers() throws IllegalServiceException{
