@@ -9,7 +9,7 @@ public class Customer {
     private final String name;
     private final int clientID;
     private Franchise fID;
-    private int numberOfServices = -1;
+    private int numberOfServices = 0;
 
     /**
      * Create a new customer object.
@@ -44,7 +44,7 @@ public class Customer {
         return numberOfServices;
     }
 
-    public void setNumberOfCourses(int numberOfServices) {
+    public void setNumberOfServices(int numberOfServices) {
         this.numberOfServices = numberOfServices;
     }
 
