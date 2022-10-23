@@ -47,9 +47,9 @@ class AddCustomerToService {
 	 	customer = new Customer("Vaidehi", 13, franchise);
 	}
 	
-	// This method test if the customer is successful added to the service
+//   This method test if the customer is successfully added to the service
 	 @Test
-	 @DisplayName("Add customer to service")
+	 @DisplayName("Add customer to service if constraints are met")
      void addCustomerToService_True() throws IllegalServiceException{
 
 		boolean is_success = service.addCustomerToService(customer, franchise);
@@ -57,8 +57,9 @@ class AddCustomerToService {
 
      }
 
-	 //This method test the customer using the same service and throws an exception	
+//  This method tests if the customer is already using the same service and throws an exception
 	@Test
+	@DisplayName("Check if the customer is using the same service")
     void addCustomerToService_ThrowsException_IfCustomerUsingSameService() throws IllegalServiceException{
 	 	
  		boolean is_success = service.addCustomerToService(customer, franchise);
@@ -72,54 +73,53 @@ class AddCustomerToService {
 	 	}
 	 
 
-//	 	//This method test if the customer has more than 3 services
-	 	@Test
-	    void addCustomerToService_False_IfServiceMoreThan3() throws IllegalServiceException{
-//			 Service service_1 = new Service("Service 1", 1);
-			 Service service_2 = new Service("Service 2", 5);
-			 Service service_3 = new Service("Service 3", 8);
-			 Service service_4 = new Service("Service 4", 11);
+//	This method test if the customer has more than 3 services
+ 	@Test
+ 	@DisplayName("Check if the cusomter holds more than 3 services")
+    void addCustomerToService_False_IfServiceMoreThan3() throws IllegalServiceException{
+		 Service service_2 = new Service("Service 2", 5);
+		 Service service_3 = new Service("Service 3", 8);
+		 Service service_4 = new Service("Service 4", 11);
+
 	
-		
-	 		boolean is_success = service.addCustomerToService(customer, franchise);
-	 		assertTrue(is_success);
+ 		boolean is_success = service.addCustomerToService(customer, franchise);
+ 		assertTrue(is_success);
 
-	     
-	 		is_success = service_2.addCustomerToService(customer, franchise);
-	 		assertTrue(is_success);
-		 
-	 		
-	 		is_success = service_3.addCustomerToService(customer, franchise);
-	 		assertTrue(is_success);
-	 		
-	       
-	 		is_success = service_4.addCustomerToService(customer, franchise);
-	 		assertFalse(is_success);
-	 		
+     
+ 		is_success = service_2.addCustomerToService(customer, franchise);
+ 		assertTrue(is_success);
+	 
+ 		
+ 		is_success = service_3.addCustomerToService(customer, franchise);
+ 		assertTrue(is_success);
+ 		
+       
+ 		is_success = service_4.addCustomerToService(customer, franchise);
+ 		assertFalse(is_success);
+ 		
 
-	     }
+     }
 
 
 	 	
-//	     //This method test if the franchise has more than 500 customer 
-		 @Test
-	     void addCustomerToService_False_FranchiseMoreThan500Customers() throws IllegalServiceException{
-	
-			Integer i = 0;
-			//Do not want to store the list of customers as it will be memory consuming
-			for (i = 0; i < 500; i++ ) {
-				Customer new_customer = new Customer("Vaidehi_" + i.toString(), i, franchise);
-				boolean is_success = service.addCustomerToService(new_customer, franchise);
-				assertTrue(is_success);
+//   This method test if the franchise has more than 500 customers 
+	 @Test
+	 @DisplayName("Check if the franchise has more than 500 customers")
+     void addCustomerToService_False_FranchiseMoreThan500Customers() throws IllegalServiceException{
 
-			}
-			Customer new_customer = new Customer("Vaidehi_", 532, franchise);
-	
+		Integer i = 0;
+		//Do not want to store the list of customers as it will be memory consuming
+		for (i = 0; i < 500; i++ ) {
+			Customer new_customer = new Customer("Vaidehi_" + i.toString(), i, franchise);
 			boolean is_success = service.addCustomerToService(new_customer, franchise);
-			assertFalse(is_success);
+			assertTrue(is_success);
 
-		 }
-//	 	
-//	 
+		}
+		Customer new_customer = new Customer("Vaidehi_", 532, franchise);
+
+		boolean is_success = service.addCustomerToService(new_customer, franchise);
+		assertFalse(is_success);
+
+	 } 
 
 }
