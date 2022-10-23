@@ -112,11 +112,8 @@ public class Service {
              
         }
 
-        
-        System.out.println("Looping over customer");
+
         for (Customer curr_customer:getCustomer()){
-        	System.out.printf("%d %s\n", customer.getId(), customer.getName());
-        	System.out.println(curr_customer.getId());
             if (customer.getId() == curr_customer.getId()){
                 throw new IllegalServiceException("Service is already being used by the same customer");
             }
@@ -127,7 +124,7 @@ public class Service {
         
 
         customer.setNumberOfServices(customer.getNumberOfServices() + 1);
-        System.out.printf("%d no of services of a customer\n", customer.getNumberOfServices());
+
 
         
 
