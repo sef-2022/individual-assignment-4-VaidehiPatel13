@@ -1,9 +1,9 @@
 package model;
 
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
-
+import java.util.ArrayList;
 
 /**
  * Service offered by the franchise.
@@ -103,10 +103,10 @@ public class Service {
             return false;
         }
 
-        List<Service> service_list = fID.getServices();
-        for (Service srv: service_list){
+        List<Service> fID_service_list = fID.getServices();
+        for (Service srv: fID_service_list){
             List<Customer> franchise_customers = srv.getCustomer();
-            if (franchise_customers.size() >= 15) {
+            if (franchise_customers.size() >= 500) {
                 return false;
             }
              
@@ -130,12 +130,11 @@ public class Service {
         System.out.printf("%d no of services of a customer\n", customer.getNumberOfServices());
 
         
-        /* TODO do not insert this service if it is already there */
-        List<Service> srv_list = new ArrayList<Service>();
-        srv_list.add(this);
-        fID.setServices(srv_list);
-        
 
+        if (fID_service_list.contains(this) == false) {
+        	fID_service_list.add(this);
+        }
+     
 
     	return true;
    
