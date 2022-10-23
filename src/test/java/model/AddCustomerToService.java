@@ -33,13 +33,13 @@ import java.util.Date;
  */
 
 class AddCustomerToService {
-	Service service;
-	Franchise franchise;
-	Customer customer;
+	private Service service;
+	private Franchise franchise;
+	private Customer customer;
 	
 	@BeforeEach
 	void setUp() {
-		service = new Service("Service", 1);
+		service = new Service("Service 1", 1);
 		 
         franchise = new Franchise();
         franchise.setID(8888);
@@ -50,27 +50,20 @@ class AddCustomerToService {
 	// This method test if the customer is successful added to the service
 	 @Test
 	 @DisplayName("Add customer to service")
-     void addCustomerToService_True(){
-		try {
-			boolean is_success = service.addCustomerToService(customer, franchise);
-	 		assertTrue(is_success);
-	 	} catch (IllegalServiceException e) {
-	 		// TODO Auto-generated catch block
-	 		e.printStackTrace();
-	 	}
+     void addCustomerToService_True() throws IllegalServiceException{
+
+		boolean is_success = service.addCustomerToService(customer, franchise);
+ 		assertTrue(is_success);
+
      }
 
 	 //This method test the customer using the same service and throws an exception	
 	@Test
-    void addCustomerToService_ThrowsException_IfCustomerUsingSameService(){
-	 	try {
-	 		boolean is_success = service.addCustomerToService(customer, franchise);
-	 		assertTrue(is_success);
-	 	} catch (IllegalServiceException e) {
-	 		// TODO Auto-generated catch block
-	 			e.printStackTrace();
-	 	}
-
+    void addCustomerToService_ThrowsException_IfCustomerUsingSameService() throws IllegalServiceException{
+	 	
+ 		boolean is_success = service.addCustomerToService(customer, franchise);
+ 		assertTrue(is_success);
+	 
 	 	assertThrows(
 	 			IllegalServiceException.class,
 	 			() -> {service.addCustomerToService(customer, franchise);},
@@ -78,120 +71,55 @@ class AddCustomerToService {
 	 			);
 	 	}
 	 
-//	//This method test the customer using the same service and throws an exception
-		 @Test
-	    void addCustomerToService_ThrowsException_IfCustomerNotUsingSameService(){
-	
-		 	try {
-		 		boolean is_success = service.addCustomerToService(customer, franchise);
-		 		assertTrue(is_success);
-		 	} catch (IllegalServiceException e) {
-		 		// TODO Auto-generated catch block
-		 			e.printStackTrace();
-		 	}
 
-		 	assertThrows(
-		 			IllegalServiceException.class,
-		 			() -> {service.addCustomerToService(customer, franchise);},
-		 			"Expected model.IllegalServiceException to be thrown, but nothing was thrown"
-		 			);
-		 	}
-
-		 
 //	 	//This method test if the customer has more than 3 services
-	 	@RepeatedTest(4)
-	    void addCustomerToService_False_IfServiceMoreThan3(){
-//			 Service service_1 = new Service("Service 1", 1);
-//			 Service service_2 = new Service("Service 2", 5);
-//			 Service service_3 = new Service("Service 3", 8);
-//			 Service service_4 = new Service("Service 4", 11);
-	
-		 	try {
-		 		boolean is_success = service.addCustomerToService(customer, franchise);
-		 		assertTrue(is_success);
-		 	} catch (IllegalServiceException e) {
-		 		// TODO Auto-generated catch block
-		 		e.printStackTrace();
-		 	}
-
-//	         try {
-//		 		boolean is_success = service_2.addCustomerToService(customer, franchise);
-//		 		assertTrue(is_success);
-//		 	} catch (IllegalServiceException e) {
-//		 		// TODO Auto-generated catch block
-//		 		e.printStackTrace();
-//		 	}
-//	         
-//	         try {
-//			 		boolean is_success = service_3.addCustomerToService(customer, franchise);
-//			 		assertTrue(is_success);
-//			 	} catch (IllegalServiceException e) {
-//			 		// TODO Auto-generated catch block
-//			 		e.printStackTrace();
-//			 	}
-//	         
-//	         try {
-//			 		boolean is_success = service_4.addCustomerToService(customer, franchise);
-//			 		assertFalse(is_success);
-//			 	} catch (IllegalServiceException e) {
-//			 		// TODO Auto-generated catch block
-//			 		e.printStackTrace();
-//			 	}
-
-	     }
-//	 	
-//	 	
-//	 	//This method test if the customer has less than 3 services
 	 	@Test
-	    void addCustomerToService_True_IfServiceLessThan3(){
-			 Service service_1 = new Service("Service 1", 1);
+	    void addCustomerToService_False_IfServiceMoreThan3() throws IllegalServiceException{
+//			 Service service_1 = new Service("Service 1", 1);
 			 Service service_2 = new Service("Service 2", 5);
+			 Service service_3 = new Service("Service 3", 8);
+			 Service service_4 = new Service("Service 4", 11);
+	
+		
+	 		boolean is_success = service.addCustomerToService(customer, franchise);
+	 		assertTrue(is_success);
 
-		 	try {
-		 		boolean is_success = service_1.addCustomerToService(customer, franchise);
-		 		assertTrue(is_success);
-		 	} catch (IllegalServiceException e) {
-		 		// TODO Auto-generated catch block
-		 		e.printStackTrace();
-		 	}
+	     
+	 		is_success = service_2.addCustomerToService(customer, franchise);
+	 		assertTrue(is_success);
+		 
+	 		
+	 		is_success = service_3.addCustomerToService(customer, franchise);
+	 		assertTrue(is_success);
+	 		
+	       
+	 		is_success = service_4.addCustomerToService(customer, franchise);
+	 		assertFalse(is_success);
+	 		
 
-	         try {
-		 		boolean is_success = service_2.addCustomerToService(customer, franchise);
-		 		assertTrue(is_success);
-		 	} catch (IllegalServiceException e) {
-		 		// TODO Auto-generated catch block
-		 		e.printStackTrace();
-		 	}
-	         
 	     }
+
+
 	 	
-//	 	
 //	     //This method test if the franchise has more than 500 customer 
 		 @Test
-	     void addCustomerToService_False_FranchiseMoreThan500Customers(){
+	     void addCustomerToService_False_FranchiseMoreThan500Customers() throws IllegalServiceException{
 	
 			Integer i = 0;
 			//Do not want to store the list of customers as it will be memory consuming
-			for (i = 0; i < 15; i++ ) {
+			for (i = 0; i < 500; i++ ) {
 				System.out.println(i);
 				Customer new_customer = new Customer("Vaidehi_" + i.toString(), i, franchise);
-				try {
-					boolean is_success = service.addCustomerToService(new_customer, franchise);
-					assertTrue(is_success);
-				} catch (IllegalServiceException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				boolean is_success = service.addCustomerToService(new_customer, franchise);
+				assertTrue(is_success);
+
 			}
 			System.out.println("ADD ONE MORE CUSTOMER");
 			Customer new_customer = new Customer("Vaidehi_", 532, franchise);
-			try {
-				boolean is_success = service.addCustomerToService(new_customer, franchise);
-				assertFalse(is_success);
-			} catch (IllegalServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	
+			boolean is_success = service.addCustomerToService(new_customer, franchise);
+			assertFalse(is_success);
+
 		 }
 //	 	
 //	 
